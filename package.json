@@ -1,0 +1,32 @@
+{
+  "name": "nodejs-hw",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/irynaboyarska/nodejs-hw.git"
+  },
+  "keywords": [],
+  "author": "Iryna Boyarska <boyarskairyna32@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/irynaboyarska/nodejs-hw/issues"
+  },
+  "homepage": "https://github.com/irynaboyarska/nodejs-hw#readme",
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.6.0",
+    "globals": "^17.7.0",
+    "nodemon": "^3.1.14"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2"
+  }
+}
