@@ -3,13 +3,16 @@ import { Note } from '../models/note.js';
 
 // Роут GET /notes
 export const getAllNotes = async (req, res) => {
-  const { tag, search } = req.query;
-  const notes = Note.find();
+  const { tag, search, page = 1, perPage = 10 } = req.query;
+  const skip = (page - 1) * perPage;
+
+  const notesQuery = Note.find();
+
   if (tag) {
-    notes.where('tag').equals(tag);
+    notesQuery.where('tag').equals(tag);
   }
   if (search) {
-    notes.where({
+    notesQuery.where({
       $or: [
         { title: { $regex: search, $options: 'i' } },
         { content: { $regex: search, $options: 'i' } },
@@ -17,10 +20,19 @@ export const getAllNotes = async (req, res) => {
     });
   }
 
-  const result = await notes;
+  const [totalNotes, notes] = await Promise.all([
+    notesQuery.clone().countDocuments(),
+    notesQuery.skip(skip).limit(perPage),
+  ]);
+
+  const totalPages = Math.ceil(totalNotes / perPage);
 
   res.status(200).json({
-    notes: result,
+    page,
+    perPage,
+    totalNotes,
+    totalPages,
+    notes,
   });
 };
 
