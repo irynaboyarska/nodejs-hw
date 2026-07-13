@@ -6,6 +6,7 @@ import { logger } from './middleware/logger.js';
 import { notFoundHandler } from './middleware/notFoundHandler.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import notesRoutes from './routes/notesRoutes.js';
+import { errors } from 'celebrate';
 
 const app = express();
 const PORT = process.env.PORT ?? 3000;
@@ -17,6 +18,7 @@ app.use(cors()); // Middleware дозволяє робити запити з і�
 app.use(notesRoutes); // Підключення маршрутизатора нотаток
 
 app.use(notFoundHandler); // Middleware для неіснуючих маршрутів
+app.use(errors()); // Обробка помилок від celebrate
 app.use(errorHandler); // Middleware для обробки помилок
 
 await connectMongoDB(); // підключення до MongoDB
