@@ -1,10 +1,20 @@
-import { Router } from "express";
-import { createNote, deleteNote, getAllNotes, getNoteById, updateNote } from "../controllers/notesController.js";
+import { Router } from 'express';
+import {
+  createNote,
+  deleteNote,
+  getAllNotes,
+  getNoteById,
+  updateNote,
+} from '../controllers/notesController.js';
 
 const router = Router();
 
 // маршрут, який буде повертати всі нотатки
 router.get('/notes', getAllNotes);
+
+router.get('/hello', (req, res) => {
+  res.json({ message: 'hello' });
+});
 
 // маршрут, який буде повертати одну нотатку за її ідентифікатором
 router.get('/notes/:noteId', getNoteById);
