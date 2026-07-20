@@ -7,6 +7,7 @@ import { notFoundHandler } from './middleware/notFoundHandler.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import notesRoutes from './routes/notesRoutes.js';
 import { errors } from 'celebrate';
+import cookieParser from 'cookie-parser';
 
 const app = express();
 const PORT = process.env.PORT ?? 3000;
@@ -14,6 +15,7 @@ const PORT = process.env.PORT ?? 3000;
 app.use(logger); // Логування запитів
 app.use(express.json()); // Middleware для парсингу JSON
 app.use(cors()); // Middleware дозволяє робити запити з інших доменів
+app.use(cookieParser());
 
 app.use(notesRoutes); // Підключення маршрутизатора нотаток
 
